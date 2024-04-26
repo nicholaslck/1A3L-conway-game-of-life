@@ -1,5 +1,30 @@
 # 1A3L-conway-game-of-life
+
 Implement the Conway's Game of Life under 3 language: Svelte, React and XXXX (TBD)
+
+## Getting Started
+
+### Install
+
+```bash
+npm install
+cd libs/core && npm install
+```
+
+### React app
+
+```bash
+cd libs/react && npm install
+cd ../..
+npx nx dev react
+```
+
+### Svelte app
+
+```bash
+cd libs/svelte && npm install
+cd ../..
+npx nx dev svelte
 
 ---
 
