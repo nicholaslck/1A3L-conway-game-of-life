@@ -29,7 +29,6 @@
     "typescript": "~5.4.2"
   },
   "workspaces": [
-    "apps/*",
     "libs/*"
   ],
   "dependencies": {
