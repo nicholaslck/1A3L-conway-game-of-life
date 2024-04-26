@@ -2,10 +2,14 @@
   "name": "core",
   "version": "0.0.1",
   "dependencies": {
-    "@swc/helpers": "~0.5.2"
+    "@swc/helpers": "~0.5.2",
+    "lodash.clonedeep": "^4.5.0"
   },
   "type": "commonjs",
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@types/lodash.clonedeep": "^4.5.9"
+  }
 }
