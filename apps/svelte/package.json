@@ -1,7 +1,7 @@
 {
-  "name": "svelte",
+  "name": "@nicholaslck/1a3l-conway-game-of-life-svelte",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
