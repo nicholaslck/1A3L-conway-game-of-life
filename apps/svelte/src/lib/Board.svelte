@@ -7,6 +7,7 @@
   export let steps: number = 0;
 
   let board: core.Board;
+  let mousedown = false;
 
   export const reset = () => {
     board = core.generateNewBoard(rows, cols);
@@ -27,17 +28,26 @@
   $: steps && next();
 </script>
 
-<div class="board">
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div
+  class="board"
+  on:mousedown={() => (mousedown = true)}
+  on:mouseup={() => (mousedown = false)}
+>
   {#if board}
     {#each board as row, i}
       <div class="row">
         {#each row as cell, j}
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <!-- svelte-ignore a11y-no-static-element-interactions -->
           <div
             class="cell"
             class:edit={mode === 'edit'}
             style="background-color: {cell ? 'black' : 'white'};"
+            on:mouseenter={() => {
+              if (mousedown) {
+                handleCellClick(i, j);
+              }
+            }}
             on:click={() => handleCellClick(i, j)}
           />
         {/each}
@@ -58,10 +68,10 @@
   }
 
   .cell {
-    min-width: 10px;
-    min-height: 10px;
-    width: 10x;
-    height: 10px;
+    min-width: 14px;
+    min-height: 14px;
+    width: 14x;
+    height: 14px;
     background-color: white;
     border: 1px solid black;
   }
