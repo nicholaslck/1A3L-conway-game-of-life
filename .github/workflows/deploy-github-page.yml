@@ -4,7 +4,7 @@ name: Deploy static content to Github Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main", 'github-page']
+    branches: ['main', 'github-page']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -18,7 +18,7 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
@@ -34,24 +34,24 @@ jobs:
       - name: Install nx
         run: npm install
 
-      - name: Install svelte-app dependencies
+      - name: Install app dependencies (Svelte)
         working-directory: ./apps/svelte
         run: npm install
 
-      - name: Install react-app dependencies
+      - name: Install app dependencies (React)
         working-directory: ./apps/react
         run: npm install
 
       - name: Nx build
-        run: npx nx run-many --target=build --all=true --parallel=3 
+        run: npx nx run-many --target=build --all=true --parallel=3
 
-      - name: Archive production artifacts
+      - name: Archive production artifacts (Svelte)
         uses: actions/upload-artifact@v4
         with:
           name: svelte-app-dist
           path: apps/svelte/dist
 
-      - name: Archive production artifacts
+      - name: Archive production artifacts (React)
         uses: actions/upload-artifact@v4
         with:
           name: react-app-dist
@@ -59,6 +59,7 @@ jobs:
 
   # Single deploy job since we're just deploying
   deploy:
+    needs: [build]
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -71,7 +72,7 @@ jobs:
         with:
           name: svelte-app-dist
           path: public/svelte
-      
+
       - uses: actions/download-artifact@v4
         with:
           name: react-app-dist
@@ -79,10 +80,10 @@ jobs:
 
       - name: Debug
         run: tree public
-    
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
