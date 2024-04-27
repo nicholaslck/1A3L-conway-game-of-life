@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Custom css */
+
+form button {
+  margin-left: 30px;
+}
+
+form label[for='cols'],
+form label[for='speed'] {
+  margin-left: 10px;
+}
+
+form {
+  margin-bottom: 36px;
+}
