@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import './App.css';
 import Board, { BoardRef } from './lib/Board';
 
@@ -16,6 +16,19 @@ function App() {
     setSteps(0);
     child.current?.reset();
   }, []);
+
+  const timerId = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (timerId.current) clearInterval(timerId.current);
+    if (mode === 'run') {
+      timerId.current = setInterval(() => {
+        setSteps((steps) => {
+          return steps + 1;
+        });
+      }, 1000 / speed);
+    }
+  }, [mode, speed]);
 
   return (
     <>

@@ -22,10 +22,11 @@ export type BoardRef = {
 
 const Board = forwardRef<BoardRef, BoardProps>((props, ref) => {
   const [board, setBoard] = useState<core.Board>([]);
-  //   const [mousedown, setMousedown] = useState(false);
+  const [mousedown, setMousedown] = useState(false);
 
   const handleCellClick = useCallback(
     (row: number, col: number) => {
+      if (props.mode === 'run') return;
       const newBoard = [...board];
       newBoard[row][col] =
         newBoard[row][col] === core.CellStatus.Live
@@ -33,7 +34,7 @@ const Board = forwardRef<BoardRef, BoardProps>((props, ref) => {
           : core.CellStatus.Live;
       setBoard(newBoard);
     },
-    [board]
+    [props.mode, board]
   );
 
   const reset = useCallback(() => {
@@ -61,8 +62,9 @@ const Board = forwardRef<BoardRef, BoardProps>((props, ref) => {
   return (
     <div
       className="board"
-      //   on:mousedown={() => (mousedown = true)}
-      //   on:mouseup={() => (mousedown = false)}
+      onMouseDown={() => setMousedown(true)}
+      onMouseUp={() => setMousedown(false)}
+      onMouseLeave={() => setMousedown(false)}
     >
       {board.map((row, rowIndex) => (
         <div className="row" key={rowIndex}>
@@ -75,6 +77,9 @@ const Board = forwardRef<BoardRef, BoardProps>((props, ref) => {
               }}
               key={colIndex}
               onClick={() => handleCellClick(rowIndex, colIndex)}
+              onMouseEnter={() => {
+                if (mousedown) handleCellClick(rowIndex, colIndex);
+              }}
             ></div>
           ))}
         </div>
