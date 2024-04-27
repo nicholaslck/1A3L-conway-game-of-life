@@ -1,4 +1,4 @@
-import { Neighbors, CellStatus } from "./types";
+import { type Neighbors, CellStatus } from "./types";
 
 export function getCellNextStatus(cell: CellStatus, neighbors: Neighbors): CellStatus {
 

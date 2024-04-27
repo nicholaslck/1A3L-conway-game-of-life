@@ -1,5 +1,5 @@
 import cloneDeep from "lodash.clonedeep";
-import { Board, BoardRow, CellStatus, Neighbors } from "./types";
+import { type Board, type BoardRow, CellStatus, type Neighbors } from "./types";
 import { getCellNextStatus } from "./rules";
 
 export const generateNewBoard = (rows: number, cols: number): Board => {
