@@ -1,47 +1,94 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+    import type { SvelteComponent } from 'svelte';
+  import Board from './lib/Board.svelte';
+
+  $: mode = 'edit';
+  $: rows = 50;
+  $: cols = 50;
+  $: speed = 8;
+  $: steps = 0;
+
+  let child: SvelteComponent | undefined;
+
+  let timer: NodeJS.Timeout;
+
+  const reset = () =>  {
+    steps = 0;
+    child?.reset();
+  }
+
+  $: if (mode === 'run') {
+    clearInterval(timer);
+    const ms = (1 / speed) * 1000;
+    timer = setInterval(() => {
+      steps += 1;
+    }, ms);
+  } else {
+    clearInterval(timer);
+  }
 </script>
 
 <main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
+  <h1>Conway's Game of Life</h1>
+  <h2>Svelte implementation</h2>
 
-  <div class="card">
-    <Counter />
-  </div>
+  <form>
+    <label for="rows">Rows:</label>
+    <input
+      type="number"
+      id="rows"
+      name="rows"
+      min="1"
+      max="100"
+      bind:value={rows}
+      disabled={mode === 'run'}
+    />
+    <label for="cols">Columns:</label>
+    <input
+      type="number"
+      id="cols"
+      name="cols"
+      min="1"
+      max="100"
+      bind:value={cols}
+      disabled={mode === 'run'}
+    />
+    <label for="speed">Growth speed:</label>
+    <input
+      type="number"
+      id="speed"
+      name="speed"
+      min="1"
+      max="20"
+      bind:value={speed}
+      disabled={mode === 'run'}
+    />
 
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
+    
+    {#if mode === 'edit'}
+    <button type="button" on:click={() => (mode = 'run')}>Start</button>
+    {:else}
+    <button type="button" on:click={() => (mode = 'edit')}>Stop</button>
+    {/if}
 
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
+    <button type="button" on:click={reset}>Reset</button>
+  </form>
+  <p>Generations: {steps}</p>
+
+  <Board {rows} {cols} {mode} {steps} bind:this={child} />
 </main>
 
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
+  form button {
+    margin-left: 30px;
   }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
+
+  form label[for='cols'],
+  form label[for='speed'] {
+    margin-left: 10px;
   }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
+
+  form {
+    margin-bottom: 36px;
   }
 </style>
