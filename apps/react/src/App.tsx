@@ -90,6 +90,17 @@ function App() {
         {/* <Board {rows} {cols} {mode} {steps} bind:this={child} /> */}
         <Board rows={rows} cols={cols} mode={mode} steps={steps} ref={child} />
       </main>
+      <footer>
+        <p>
+          This project is developed by{' '}
+          <a href="https://github.com/nicholaslck">@nicholaslck</a>, the source
+          code is available at{' '}
+          <a href="https://github.com/nicholaslck/1A3L-conway-game-of-life">
+            Github
+          </a>
+          .
+        </p>
+      </footer>
     </>
   );
 }

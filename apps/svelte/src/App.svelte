@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { SvelteComponent } from 'svelte';
+  import type { SvelteComponent } from 'svelte';
   import Board from './lib/Board.svelte';
 
   $: mode = 'edit';
@@ -12,10 +12,10 @@
 
   let timer: NodeJS.Timeout;
 
-  const reset = () =>  {
+  const reset = () => {
     steps = 0;
     child?.reset();
-  }
+  };
 
   $: if (mode === 'run') {
     clearInterval(timer);
@@ -64,11 +64,10 @@
       disabled={mode === 'run'}
     />
 
-    
     {#if mode === 'edit'}
-    <button type="button" on:click={() => (mode = 'run')}>Start</button>
+      <button type="button" on:click={() => (mode = 'run')}>Start</button>
     {:else}
-    <button type="button" on:click={() => (mode = 'edit')}>Stop</button>
+      <button type="button" on:click={() => (mode = 'edit')}>Stop</button>
     {/if}
 
     <button type="button" on:click={reset}>Reset</button>
@@ -77,6 +76,11 @@
 
   <Board {rows} {cols} {mode} {steps} bind:this={child} />
 </main>
+<footer>
+  <p>
+    This project is developed by <a href="https://github.com/nicholaslck">@nicholaslck</a>, the source code is available at <a href="https://github.com/nicholaslck/1A3L-conway-game-of-life">Github</a>.
+  </p>
+</footer>
 
 <style>
   form button {
