@@ -1,11 +1,11 @@
 {
-  "name": "svelte",
+  "name": "@nicholaslck/1a3l-conway-game-of-life-svelte",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=./",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "lint": "nx eslint:lint --ext ts,tsx --report-unused-disable-directives --max-warnings 0"

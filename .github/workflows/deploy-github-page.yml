@@ -1,0 +1,94 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Github Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ['main']
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21.7.1
+      - name: Install nx
+        run: npm install
+
+      - name: Install app dependencies (Svelte)
+        working-directory: ./apps/svelte
+        run: npm install
+
+      - name: Install app dependencies (React)
+        working-directory: ./apps/react
+        run: npm install
+
+      - name: Nx build
+        run: npx nx run-many --target=build --all=true --parallel=3
+
+      - name: Archive production artifacts (Svelte)
+        uses: actions/upload-artifact@v4
+        with:
+          name: svelte-app-dist
+          path: apps/svelte/dist
+
+      - name: Archive production artifacts (React)
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-app-dist
+          path: apps/react/dist
+
+  # Single deploy job since we're just deploying
+  deploy:
+    needs: [build]
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: svelte-app-dist
+          path: public/svelte
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: react-app-dist
+          path: public/react
+
+      - name: View public folder
+        run: tree public
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './public'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

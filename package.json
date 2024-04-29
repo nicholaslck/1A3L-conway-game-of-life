@@ -1,6 +1,10 @@
 {
-  "name": "org",
-  "version": "0.0.0",
+  "name": "@nicholaslck/1a3l-conway-game-of-life",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicholaslck/1A3L-conway-game-of-life.git"
+  },
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {},
   "private": true,
