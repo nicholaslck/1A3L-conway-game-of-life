@@ -5,6 +5,8 @@ It implements the [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%2
 
 Demo site: https://nicholaslck.github.io/1A3L-conway-game-of-life/
 
+![demo gif](./docs/demo.gif)
+
 ## Getting Started
 
 ### Install
