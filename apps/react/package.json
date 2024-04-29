@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --base=/1a3l-conway-game-of-life/react/",
+    "build": "tsc && vite build --base=./",
     "lint": "nx eslint:lint --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
