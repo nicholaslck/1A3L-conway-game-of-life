@@ -11,22 +11,19 @@ Demo site: https://nicholaslck.github.io/1A3L-conway-game-of-life/
 
 ```bash
 npm install
-cd libs/core && npm install
 ```
 
 ### React app
 
 ```bash
-cd libs/react && npm install
-cd ../..
+npm run install:react
 npx nx dev react
 ```
 
 ### Svelte app
 
 ```bash
-cd libs/svelte && npm install
-cd ../..
+npm run install:svelte
 npx nx dev svelte
 ```
 
