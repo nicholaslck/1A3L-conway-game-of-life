@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Github Pages
+name: Deploy to Github Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -35,12 +35,10 @@ jobs:
         run: npm install
 
       - name: Install app dependencies (Svelte)
-        working-directory: ./apps/svelte
-        run: npm install
+        run: npm run install:svelte
 
       - name: Install app dependencies (React)
-        working-directory: ./apps/react
-        run: npm install
+        run: npm run install:react
 
       - name: Nx build
         run: npx nx run-many --target=build --all=true --parallel=3
@@ -48,13 +46,13 @@ jobs:
       - name: Archive production artifacts (Svelte)
         uses: actions/upload-artifact@v4
         with:
-          name: svelte-app-dist
+          name: app-svelte-dist
           path: apps/svelte/dist
 
       - name: Archive production artifacts (React)
         uses: actions/upload-artifact@v4
         with:
-          name: react-app-dist
+          name: app-react-dist
           path: apps/react/dist
 
   # Single deploy job since we're just deploying
@@ -70,12 +68,12 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: svelte-app-dist
+          name: app-svelte-dist
           path: public/svelte
 
       - uses: actions/download-artifact@v4
         with:
-          name: react-app-dist
+          name: app-react-dist
           path: public/react
 
       - name: View public folder
