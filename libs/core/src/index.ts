@@ -1,4 +1,9 @@
-export * from './lib/types';
+import * as types from './lib/types';
+import * as rules from './lib/rules';
+import * as board from './lib/board';
 
-export * from './lib/rules';
-export * from './lib/board';
+export default {
+    types,
+    rules,
+    board
+}

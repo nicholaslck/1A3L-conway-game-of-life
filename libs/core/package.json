@@ -10,6 +10,9 @@
   "typings": "./src/index.d.ts",
   "private": true,
   "devDependencies": {
-    "@types/lodash.clonedeep": "^4.5.9"
+    "@swc/cli": "^0.3.12",
+    "@swc/core": "^1.4.17",
+    "@types/lodash.clonedeep": "^4.5.9",
+    "vite": "^5.2.0"
   }
 }
