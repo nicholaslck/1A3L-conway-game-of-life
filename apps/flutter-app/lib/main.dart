@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/js/js_helper.dart';
+import 'package:flutter_app/home.dart';
+import 'package:flutter_app/js/coreLib.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: "Conway's Game of Life",
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -29,10 +30,11 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const MyHomePage(title: "Conway's Game of Life"),
+      home: const BoardHome(title: "Conway's Game of Life"),
     );
   }
 }
@@ -58,12 +60,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    helloWorld();
+  int row = 50;
+  int col = 50;
 
-    // Core();
-    Core core = createCore();
-    core.test();
+  late Board board;
+
+  void _incrementCounter() {
+    // TODO:
+    Board board = coreGenerateNewBoard(10, 10);
 
     setState(() {
       // This call to setState tells the Flutter framework that something has

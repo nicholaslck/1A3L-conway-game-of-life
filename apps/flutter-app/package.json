@@ -11,7 +11,8 @@
     "dev": "flutter run -d chrome --web-renderer html",
     "build": "flutter build web --web-renderer html",
     "clean": "flutter clean",
-    "preview": "npx vite preview --outDir build/web/"
+    "preview": "npx vite preview --outDir build/web/",
+    "install:lib": "nx build core && ln -sf $(realpath ../../libs/core/dist/bundle/) web/dist"
   },
   "author": "",
   "license": "MIT"
