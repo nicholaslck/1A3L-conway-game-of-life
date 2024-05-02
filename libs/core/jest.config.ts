@@ -26,5 +26,5 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   testEnvironment: 'node',
-  coverageDirectory: '../../coverage/libs/core',
+  coverageDirectory: './coverage',
 };
