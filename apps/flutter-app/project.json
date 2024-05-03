@@ -1,7 +1,6 @@
 {
-  "name": "core",
+  "name": "flutter-app",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/core/src",
-  "projectType": "library",
+  "sourceRoot": "apps/flutter-app/src",
   "tags": []
 }

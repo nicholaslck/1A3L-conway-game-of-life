@@ -1,0 +1,20 @@
+{
+  "name": "flutter-app",
+  "version": "1.0.0",
+  "description": "Flutter implementation of Conway's game of life",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "install": "flutter pub get",
+    "postinstall": "nx build core && ln -sf $(realpath ../../libs/core/dist/bundle/) web/dist",
+    "test": "flutter test",
+    "dev": "flutter run -d chrome --web-renderer canvaskit",
+    "build": "flutter build web --web-renderer canvaskit --base-href=\"/web/\"",
+    "clean": "flutter clean",
+    "preview": "npx vite preview --outDir build/web/"
+  },
+  "author": "",
+  "license": "MIT"
+}

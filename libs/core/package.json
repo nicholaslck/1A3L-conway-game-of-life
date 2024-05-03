@@ -2,14 +2,20 @@
   "name": "core",
   "version": "0.0.1",
   "dependencies": {
-    "@swc/helpers": "~0.5.2",
-    "lodash.clonedeep": "^4.5.0"
+    "@swc/helpers": "~0.5.2"
+  },
+  "scripts": {
+    "build": "npx swc src/ -d dist/",
+    "postbuild": "vite build",
+    "test": "jest --coverage"
   },
   "type": "commonjs",
   "main": "./src/index.js",
   "typings": "./src/index.d.ts",
   "private": true,
   "devDependencies": {
-    "@types/lodash.clonedeep": "^4.5.9"
+    "@swc/cli": "^0.3.12",
+    "@swc/core": "^1.4.17",
+    "vite": "^5.2.0"
   }
 }

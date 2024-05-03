@@ -4,7 +4,7 @@ name: Deploy to Github Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ['main']
+    branches: ['main', 'app-flutter']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -31,6 +31,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 21.7.1
+      - name: Setup Flutter SDK
+        uses: flutter-actions/setup-flutter@v3
+        with:
+          channel: stable
+          version: 3.19.6
+      
       - name: Install nx
         run: npm install
 
@@ -39,6 +45,9 @@ jobs:
 
       - name: Install app dependencies (React)
         run: npm run install:react
+
+      - name: Install app dependencies (Flutter)
+        run: npx nx install flutter-app
 
       - name: Nx build
         run: npx nx run-many --target=build --all=true --parallel=3
@@ -54,6 +63,12 @@ jobs:
         with:
           name: app-react-dist
           path: apps/react/dist
+
+      - name: Archive production artifacts (Flutter)
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-flutter-dist
+          path: apps/flutter-app/build/web
 
   # Single deploy job since we're just deploying
   deploy:
@@ -75,6 +90,11 @@ jobs:
         with:
           name: app-react-dist
           path: public/react
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: app-flutter-dist
+          path: public/flutter
 
       - name: View public folder
         run: tree public

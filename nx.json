@@ -11,7 +11,14 @@
       "plugin": "@nx/eslint/plugin",
       "options": {
         "targetName": "eslint:lint",
-        "extensions": ["ts", "tsx", "js", "jsx", "html", "vue"]
+        "extensions": [
+          "ts",
+          "tsx",
+          "js",
+          "jsx",
+          "html",
+          "vue"
+        ]
       }
     },
     {
@@ -19,13 +26,41 @@
       "options": {
         "targetName": "test"
       }
+    },
+    {
+      "plugin": "@nxrocks/nx-flutter",
+      "options": {
+        "analyzeTargetName": "analyze",
+        "cleanTargetName": "clean",
+        "formatTargetName": "format",
+        "testTargetName": "test",
+        "doctorTargetName": "doctor",
+        "assembleTargetName": "assemble",
+        "attachTargetName": "attach",
+        "driveTargetName": "drive",
+        "genL10nTargetName": "gen-l10n",
+        "installTargetName": "install",
+        "runTargetName": "run",
+        "buildAarTargetName": "build-aar",
+        "buildApkTargetName": "build-apk",
+        "buildAppbundleTargetName": "build-appbundle",
+        "buildBundleTargetName": "build-bundle",
+        "buildIosTargetName": "build-ios",
+        "buildIosFrameworkTargetName": "build-ios-framework",
+        "buildIpaTargetName": "build-ipa"
+      }
     }
   ],
   "targetDefaults": {
     "@nx/js:swc": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["default", "^default"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "default",
+        "^default"
+      ]
     }
   }
 }
