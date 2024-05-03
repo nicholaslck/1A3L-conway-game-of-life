@@ -1,7 +1,7 @@
 # 1A3L-conway-game-of-life
 
 This is a project under the 1-App-3-Languages (1A3L) series.
-It implements the [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) under 3 language: Svelte, React and XXXX (TBD)
+It implements the [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) under 3 language: Svelte, React and Flutter
 
 Demo site: https://nicholaslck.github.io/1A3L-conway-game-of-life/
 
@@ -27,6 +27,14 @@ npx nx dev react
 ```bash
 npm run install:svelte
 npx nx dev svelte
+```
+
+### Flutter app
+
+```bash
+# Make sure you have flutter SDK installed first.
+npm run install:flutter-app
+npx nx dev flutter-app
 ```
 
 ## Features
