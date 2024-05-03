@@ -1,4 +1,3 @@
-import cloneDeep from "lodash.clonedeep";
 import { type Board, type BoardRow, CellStatus, type Neighbors } from "./types";
 import { getCellNextStatus } from "./rules";
 
@@ -38,7 +37,7 @@ export const getNumberOfLiveNeighbors = (neighbors: Neighbors): number => {
 
 export const getNextBoard = (board: Board): Board => {
 
-    const nextBoard: Board = cloneDeep(board);
+    const nextBoard: Board = [...board];
 
     for (let row = 0; row < board.length; row++) {
         for (let col = 0; col < board[row].length; col++) {

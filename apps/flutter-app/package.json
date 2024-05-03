@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "flutter test",
-    "dev": "flutter run -d chrome --web-renderer html",
-    "build": "flutter build web --web-renderer html",
+    "dev": "flutter run -d chrome --web-renderer canvaskit",
+    "build": "flutter build web --web-renderer canvaskit",
     "clean": "flutter clean",
     "preview": "npx vite preview --outDir build/web/",
     "install:lib": "nx build core && ln -sf $(realpath ../../libs/core/dist/bundle/) web/dist"

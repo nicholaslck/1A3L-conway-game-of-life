@@ -31,14 +31,14 @@ npx nx dev svelte
 
 ## Features
 
-| Feature                     | Svelte | React | XXXX (TBD) |
+| Feature                     | Svelte | React | Flutter |
 | --------------------------- | ------ | ----- | ---- |
-| Rows and Cols configuration | ✅      | ✅     |      |
-| Display game board          | ✅      | ✅     |      |
-| Reset game board            | ✅      | ✅     |      |
-| Start/Stop the game         | ✅      | ✅     |      |
-| Growth speed configuration  | ✅      | ✅     |      |
-| Click to change cell state  | ✅      | ✅     |      |
+| Rows and Cols configuration | ✅      | ✅     | ✅     |
+| Display game board          | ✅      | ✅     | ✅     |
+| Reset game board            | ✅      | ✅     | ✅     |
+| Start/Stop the game         | ✅      | ✅     | ✅     |
+| Growth speed configuration  | ✅      | ✅     | ✅     |
+| Click to change cell state  | ✅      | ✅     | ✅     |
 | Drag to change cells states | ✅      | ✅     |      |
 | Randomize cells             |        |       |      |
 
